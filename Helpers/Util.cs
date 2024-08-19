@@ -12,14 +12,11 @@ namespace Store.Helpers
     {
         private static readonly HttpClient client = new HttpClient();
 
-
-
         public static async Task<CnpjApiModel> GetCnpjApi(string cnpj)
         {
             CnpjApiModel cnpjApiModel = await searchCnpj(cnpj);
 
             return cnpjApiModel;
-
         }
 
         public static async Task<CnpjApiModel> searchCnpj(string cnpj)
@@ -40,13 +37,18 @@ namespace Store.Helpers
                 // Analisa o JSON retornado pela API
                 var data = JObject.Parse(responseBody);
 
+                if (data.ContainsKey("cnpj") == false) return null;
+
                 // Captura as informações da 
                 CnpjApiModel cnpjApiModel = new CnpjApiModel();
                 cnpjApiModel.Cnpj = data["cnpj"] + "";
                 cnpjApiModel.Name = data["nome"] + "";
                 cnpjApiModel.Address = $"{data["logradouro"]}, {data["bairro"]} - {data["municipio"]} - {data["uf"]}";
-                if (!data["atividade_principal"].Equals(""))
-                cnpjApiModel.Description = data["atividade_principal"][0]["text"] + "";
+   
+                if (data.ContainsKey("atividade_principal"))
+                {
+                    cnpjApiModel.Description = data["atividade_principal"][0]["text"] + "";
+                }
 
                 return cnpjApiModel;
             }
@@ -57,10 +59,23 @@ namespace Store.Helpers
             }
         }
 
-        public static string ExtrairNumeros(string texto)
+        public static string ExtractNumber(string texto)
         {
             // Remove tudo que não for número
             return System.Text.RegularExpressions.Regex.Replace(texto, @"\D", "");
+        }
+
+       public static string MaskCnpj(string cnpj)
+        {
+            if (cnpj.Length != 14)
+                throw new ArgumentException("O CNPJ deve ter 14 dígitos.");
+
+            return string.Format("{0}.{1}.{2}/{3}-{4}",
+                cnpj.Substring(0, 2),
+                cnpj.Substring(2, 3),
+                cnpj.Substring(5, 3),
+                cnpj.Substring(8, 4),
+                cnpj.Substring(12, 2));
         }
     }
 }

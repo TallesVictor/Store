@@ -15,10 +15,7 @@ namespace Store
         {
             InitializeComponent();
             txtCnpj.Mask = "00\\.000\\.000/0000-00";
-            listStores();
-
-
-
+            ListStores();
         }
 
         private void btSave_Click_1(object sender, EventArgs e)
@@ -27,17 +24,21 @@ namespace Store
             StoreController controller = new StoreController();
 
             StoreModel store = FillStore();
-            bool saveStore = controller.createStore(store);
 
-            if (saveStore)
+            if (store != null)
             {
-                ClearTxt();
-                listStores();
-                MessageBox.Show($"Usuário {store.Name}, cadastrado com sucesso!");
-            }
-            else
-            {
-                MessageBox.Show("Erro na criação!");
+                bool saveStore = controller.createStore(store);
+
+                if (saveStore)
+                {
+                    ClearTxt();
+                    ListStores();
+                    MessageBox.Show($"Usuário {store.Name}, cadastrado com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Erro na criação!");
+                }
             }
         }
 
@@ -70,7 +71,7 @@ namespace Store
 
                 btnUpdate.Text = "Detalhes";
                 ClearTxt();
-                listStores();
+                ListStores();
                 MessageBox.Show("Atualizado com Sucesso!");
             }
             else
@@ -86,7 +87,7 @@ namespace Store
         private StoreModel FillStore()
         {
             string name = txtName.Text;
-            string cnpj = txtCnpj.Text;
+            string cnpj = Util.ExtractNumber(txtCnpj.Text);
             string description = txtDescription.Text;
             string address = txtAddress.Text;
 
@@ -142,7 +143,7 @@ namespace Store
             txtAddress.Clear();
         }
 
-        private void listStores()
+        private void ListStores()
         {
             StoreDao storeDao = new StoreDao();
             List<StoreModel> stores = storeDao.GetStoreList();
@@ -153,7 +154,7 @@ namespace Store
             {
                 var listViewItem = new ListViewItem(store.Id + "");
                 listViewItem.SubItems.Add(store.Name);
-                listViewItem.SubItems.Add(store.Cnpj);
+                listViewItem.SubItems.Add(Util.MaskCnpj(store.Cnpj));
                 listViewItem.SubItems.Add(store.Description);
                 listViewItem.SubItems.Add(store.Address);
 
@@ -165,10 +166,14 @@ namespace Store
 
         private void txtCnpj_TextChanged(object sender, EventArgs e)
         {
-            string cnpj = Util.ExtrairNumeros(txtCnpj.Text);
+
+            string cnpj = Util.ExtractNumber(txtCnpj.Text);
 
             if (cnpj.Length >= 14)
             {
+                lbLoadingCnpj.Text = "Buscando CNPJ...";
+                lbLoadingCnpj.Visible = true;
+
                 FillFields(cnpj);
             }
         }
@@ -176,6 +181,10 @@ namespace Store
         private async Task FillFields(string cnpj)
         {
             CnpjApiModel cnpjApiModel = await Util.searchCnpj(cnpj);
+
+            lbLoadingCnpj.Text = "";
+            lbLoadingCnpj.Visible = false;
+
             txtName.Text = cnpjApiModel.Name;
             txtDescription.Text = cnpjApiModel.Description;
             txtAddress.Text = cnpjApiModel.Address;

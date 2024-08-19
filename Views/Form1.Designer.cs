@@ -41,19 +41,20 @@
             this.columnId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnCnpj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lbId = new System.Windows.Forms.Label();
             this.txtCnpj = new System.Windows.Forms.MaskedTextBox();
+            this.lbLoadingCnpj = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Nachlieli CLM", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(330, 18);
+            this.lblTitle.Location = new System.Drawing.Point(504, 17);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(155, 23);
             this.lblTitle.TabIndex = 0;
@@ -71,7 +72,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(90, 87);
+            this.txtName.Location = new System.Drawing.Point(90, 98);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(157, 20);
             this.txtName.TabIndex = 4;
@@ -80,7 +81,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(21, 88);
+            this.lblName.Location = new System.Drawing.Point(21, 99);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(44, 15);
             this.lblName.TabIndex = 3;
@@ -88,7 +89,7 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(90, 113);
+            this.txtAddress.Location = new System.Drawing.Point(90, 124);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(157, 20);
             this.txtAddress.TabIndex = 6;
@@ -97,7 +98,7 @@
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddress.Location = new System.Drawing.Point(21, 114);
+            this.lblAddress.Location = new System.Drawing.Point(21, 125);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(63, 15);
             this.lblAddress.TabIndex = 5;
@@ -105,7 +106,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(90, 139);
+            this.txtDescription.Location = new System.Drawing.Point(90, 150);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(157, 20);
             this.txtDescription.TabIndex = 8;
@@ -114,7 +115,7 @@
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(21, 140);
+            this.lblDescription.Location = new System.Drawing.Point(21, 151);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(68, 15);
             this.lblDescription.TabIndex = 7;
@@ -122,7 +123,7 @@
             // 
             // btSave
             // 
-            this.btSave.Location = new System.Drawing.Point(24, 175);
+            this.btSave.Location = new System.Drawing.Point(24, 186);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(223, 31);
             this.btSave.TabIndex = 9;
@@ -144,7 +145,7 @@
             this.lvStores.Location = new System.Drawing.Point(266, 62);
             this.lvStores.MultiSelect = false;
             this.lvStores.Name = "lvStores";
-            this.lvStores.Size = new System.Drawing.Size(802, 431);
+            this.lvStores.Size = new System.Drawing.Size(816, 431);
             this.lvStores.TabIndex = 10;
             this.lvStores.UseCompatibleStateImageBehavior = false;
             this.lvStores.View = System.Windows.Forms.View.Details;
@@ -162,21 +163,21 @@
             // columnCnpj
             // 
             this.columnCnpj.Text = "CNPJ";
-            this.columnCnpj.Width = 100;
-            // 
-            // columnAddress
-            // 
-            this.columnAddress.Text = "Endereço";
-            this.columnAddress.Width = 200;
+            this.columnCnpj.Width = 120;
             // 
             // columnDescription
             // 
             this.columnDescription.Text = "Descrição";
-            this.columnDescription.Width = 200;
+            this.columnDescription.Width = 250;
+            // 
+            // columnAddress
+            // 
+            this.columnAddress.Text = "Endereço";
+            this.columnAddress.Width = 250;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(24, 222);
+            this.btnUpdate.Location = new System.Drawing.Point(24, 233);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(223, 31);
             this.btnUpdate.TabIndex = 11;
@@ -186,7 +187,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(24, 271);
+            this.btnDelete.Location = new System.Drawing.Point(24, 282);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(223, 31);
             this.btnDelete.TabIndex = 12;
@@ -212,11 +213,21 @@
             this.txtCnpj.TabIndex = 14;
             this.txtCnpj.TextChanged += new System.EventHandler(this.txtCnpj_TextChanged);
             // 
+            // lbLoadingCnpj
+            // 
+            this.lbLoadingCnpj.AutoSize = true;
+            this.lbLoadingCnpj.Location = new System.Drawing.Point(87, 84);
+            this.lbLoadingCnpj.Name = "lbLoadingCnpj";
+            this.lbLoadingCnpj.Size = new System.Drawing.Size(0, 13);
+            this.lbLoadingCnpj.TabIndex = 15;
+            this.lbLoadingCnpj.Visible = false;
+            // 
             // Loja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1094, 505);
+            this.Controls.Add(this.lbLoadingCnpj);
             this.Controls.Add(this.txtCnpj);
             this.Controls.Add(this.lbId);
             this.Controls.Add(this.btnDelete);
@@ -264,6 +275,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label lbId;
         private System.Windows.Forms.MaskedTextBox txtCnpj;
+        private System.Windows.Forms.Label lbLoadingCnpj;
     }
 }
 
