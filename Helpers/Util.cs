@@ -8,7 +8,7 @@ using Store.Models;
 
 namespace Store.Helpers
 {
-    internal class HelpApi
+    internal class Util
     {
         private static readonly HttpClient client = new HttpClient();
 
@@ -45,6 +45,7 @@ namespace Store.Helpers
                 cnpjApiModel.Cnpj = data["cnpj"] + "";
                 cnpjApiModel.Name = data["nome"] + "";
                 cnpjApiModel.Address = $"{data["logradouro"]}, {data["bairro"]} - {data["municipio"]} - {data["uf"]}";
+                if (!data["atividade_principal"].Equals(""))
                 cnpjApiModel.Description = data["atividade_principal"][0]["text"] + "";
 
                 return cnpjApiModel;
@@ -54,6 +55,12 @@ namespace Store.Helpers
                 MessageBox.Show($"Erro ao consultar a API: {e.Message}");
                 return null;
             }
+        }
+
+        public static string ExtrairNumeros(string texto)
+        {
+            // Remove tudo que não for número
+            return System.Text.RegularExpressions.Regex.Replace(texto, @"\D", "");
         }
     }
 }

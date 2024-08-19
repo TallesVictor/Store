@@ -30,7 +30,6 @@
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblCnpj = new System.Windows.Forms.Label();
-            this.txtCnpj = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -47,6 +46,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lbId = new System.Windows.Forms.Label();
+            this.txtCnpj = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -68,14 +68,6 @@
             this.lblCnpj.Size = new System.Drawing.Size(41, 15);
             this.lblCnpj.TabIndex = 1;
             this.lblCnpj.Text = "CNPJ:";
-            // 
-            // txtCnpj
-            // 
-            this.txtCnpj.Location = new System.Drawing.Point(90, 61);
-            this.txtCnpj.Name = "txtCnpj";
-            this.txtCnpj.Size = new System.Drawing.Size(157, 20);
-            this.txtCnpj.TabIndex = 2;
-            this.txtCnpj.TextChanged += new System.EventHandler(this.txtCnpj_TextChanged);
             // 
             // txtName
             // 
@@ -179,7 +171,6 @@
             // 
             // columnDescription
             // 
-            this.columnDescription.DisplayIndex = 3;
             this.columnDescription.Text = "Descrição";
             this.columnDescription.Width = 200;
             // 
@@ -213,11 +204,20 @@
             this.lbId.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.lbId.Visible = false;
             // 
+            // txtCnpj
+            // 
+            this.txtCnpj.Location = new System.Drawing.Point(90, 61);
+            this.txtCnpj.Name = "txtCnpj";
+            this.txtCnpj.Size = new System.Drawing.Size(157, 20);
+            this.txtCnpj.TabIndex = 14;
+            this.txtCnpj.TextChanged += new System.EventHandler(this.txtCnpj_TextChanged);
+            // 
             // Loja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1094, 505);
+            this.Controls.Add(this.txtCnpj);
             this.Controls.Add(this.lbId);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
@@ -229,7 +229,6 @@
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
-            this.Controls.Add(this.txtCnpj);
             this.Controls.Add(this.lblCnpj);
             this.Controls.Add(this.lblTitle);
             this.MaximizeBox = false;
@@ -238,6 +237,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Loja";
             this.TopMost = true;
+            this.TextChanged += new System.EventHandler(this.txtCnpj_TextChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,7 +247,6 @@
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblCnpj;
-        private System.Windows.Forms.TextBox txtCnpj;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtAddress;
@@ -264,6 +263,7 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label lbId;
+        private System.Windows.Forms.MaskedTextBox txtCnpj;
     }
 }
 

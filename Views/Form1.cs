@@ -1,4 +1,5 @@
-﻿using Store.Dao;
+﻿using Store.Controllers;
+using Store.Dao;
 using Store.Helpers;
 using Store.Models;
 using System;
@@ -13,6 +14,7 @@ namespace Store
         public Loja()
         {
             InitializeComponent();
+            txtCnpj.Mask = "00\\.000\\.000/0000-00";
             listStores();
 
 
@@ -22,8 +24,11 @@ namespace Store
         private void btSave_Click_1(object sender, EventArgs e)
         {
 
+            StoreController controller = new StoreController();
+
             StoreModel store = FillStore();
-            bool saveStore = store.save();
+            bool saveStore = controller.createStore(store);
+
             if (saveStore)
             {
                 ClearTxt();
@@ -47,21 +52,22 @@ namespace Store
                 int id = int.Parse(lvStores.SelectedItems[0].SubItems[0].Text);
                 lvStores.Items.RemoveAt(lvStores.SelectedIndices[0]);
 
-                StoreDao storeDao = new StoreDao();
-                storeDao.DeleteStore(id);
+                StoreController controller = new StoreController();
+                controller.deleteStore(id);
 
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
+            StoreController controller = new StoreController();
             string btnUpdateText = btnUpdate.Text;
 
             if (btnUpdateText.Equals("Atualizar"))
             {
                 StoreModel store = FillStore();
-                store.update();
+                controller.updateStore(store);
+
                 btnUpdate.Text = "Detalhes";
                 ClearTxt();
                 listStores();
@@ -118,14 +124,13 @@ namespace Store
         //Buscar a loja no BD
         private StoreModel SearchStore()
         {
-            StoreDao storeDao = new StoreDao();
-            StoreModel store = new StoreModel();
+
+            StoreController store = new StoreController();
 
             if (lvStores.SelectedItems.Count == 0) return null;
             int id = int.Parse(lvStores.SelectedItems[0].SubItems[0].Text);
-            store = storeDao.SearchStoreForId(id);
 
-            return store;
+            return store.GetStore(id);
         }
 
         //Limpar campos
@@ -158,22 +163,22 @@ namespace Store
 
         }
 
-        private async Task FillFields()
+        private void txtCnpj_TextChanged(object sender, EventArgs e)
         {
-            string cnpj = txtCnpj.Text;
+            string cnpj = Util.ExtrairNumeros(txtCnpj.Text);
 
-            CnpjApiModel cnpjApiModel = await HelpApi.searchCnpj(cnpj);
+            if (cnpj.Length >= 14)
+            {
+                FillFields(cnpj);
+            }
+        }
+
+        private async Task FillFields(string cnpj)
+        {
+            CnpjApiModel cnpjApiModel = await Util.searchCnpj(cnpj);
             txtName.Text = cnpjApiModel.Name;
             txtDescription.Text = cnpjApiModel.Description;
             txtAddress.Text = cnpjApiModel.Address;
-        }
-
-        private void txtCnpj_TextChanged(object sender, EventArgs e)
-        {
-            if (txtCnpj.TextLength >= 14)
-            {
-                FillFields();
-            }
         }
     }
 }
