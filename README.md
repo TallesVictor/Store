@@ -1,7 +1,7 @@
 # Store
 
 ## Observação
-- Para o projeto funcionar corretamente, utilize o dump [Uploading dump-store_c-202408201116.sql…]() , nome do BD *store_c*
+- Para o projeto funcionar corretamente, utilize o dump https://github.com/TallesVictor/Store/blob/master/dump-store_c-202408201116.sql , nome do banco de dados *store_c*
 
 
 ## Descrição do Projeto
