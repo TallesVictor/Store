@@ -1,5 +1,9 @@
 # Store
 
+## Observação
+- Para o projeto funcionar corretamente, utilize o dump [Uploading dump-store_c-202408201116.sql…]() , nome do BD *store_c*
+
+
 ## Descrição do Projeto
 
 Desenvolver uma aplicação desktop utilizando C# que:
